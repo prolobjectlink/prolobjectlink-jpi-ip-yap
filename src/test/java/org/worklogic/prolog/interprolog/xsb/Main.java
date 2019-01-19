@@ -19,13 +19,31 @@
  */
 package org.worklogic.prolog.interprolog.xsb;
 
+import java.io.Reader;
+import java.io.StringReader;
+
 import com.declarativa.interprolog.PrologEngine;
 import com.declarativa.interprolog.XSBSubprocessEngine;
+import com.igormaznitsa.prologparser.DefaultParserContext;
+import com.igormaznitsa.prologparser.GenericPrologParser;
+import com.igormaznitsa.prologparser.ParserContext;
+import com.igormaznitsa.prologparser.PrologParser;
+import com.igormaznitsa.prologparser.terms.PrologTerm;
+import com.igormaznitsa.prologparser.tokenizer.Op;
 import com.xsb.interprolog.NativeEngine;
 
 public class Main {
 
 	public static void main(String[] args) {
+
+		Reader reader = new StringReader("hello(world). some({1,2,3}). power(X,Y,Z) :- Z is X ** Y.");
+		PrologParser parser = new GenericPrologParser(reader,
+				new DefaultParserContext(ParserContext.FLAG_CURLY_BRACKETS, Op.SWI));
+
+		for (PrologTerm prologTerm : parser) {
+			System.out.println(prologTerm);
+		}
+
 		subprocessEngine("C:\\Program Files (x86)\\XSB\\bin");
 		nativeEngine("C:\\Program Files (x86)\\XSB\\config\\x64-pc-windows\\bin");
 	}

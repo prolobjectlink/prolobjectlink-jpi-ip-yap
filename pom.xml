@@ -81,7 +81,7 @@
 		<maven.compiler.source>1.5</maven.compiler.source>
 		<maven.compiler.target>1.5</maven.compiler.target>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.worklogic</groupId>
@@ -92,18 +92,6 @@
 			<groupId>org.worklogic</groupId>
 			<artifactId>prolobjectlink-jpi-ip</artifactId>
 			<version>[1.0.0, )</version>
-		</dependency>
-		<dependency>
-			<groupId>com.igormaznitsa</groupId>
-			<artifactId>prologparser</artifactId>
-			<version>1.3.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.declarativa.interprolog</groupId>
-			<artifactId>interprolog-2016.jar</artifactId>
-			<version>312e07a</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/interprolog-2016.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -509,6 +497,6 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	
+
 
 </project>
