@@ -25,11 +25,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.logicware.prolog.PrologOperatorSet;
-import org.worklogic.prolog.interprolog.xsb.XsbPrologOperatorSet;
+import org.worklogic.prolog.interprolog.InterPrologOperatorSet;
 
 public class PrologOperatorSetTest {
 
-	private PrologOperatorSet s = new XsbPrologOperatorSet();
+	private PrologOperatorSet s = new InterPrologOperatorSet();
 
 	@Test
 	public void testCurrentOp() {
@@ -99,7 +99,7 @@ public class PrologOperatorSetTest {
 
 	@Test
 	public void testEquals() {
-		assertTrue(s.equals(new XsbPrologOperatorSet()));
+		assertTrue(s.equals(new InterPrologOperatorSet()));
 		assertFalse(s.equals(new Object()));
 		assertFalse(s.equals(null));
 		assertTrue(s.equals(s));
@@ -107,7 +107,7 @@ public class PrologOperatorSetTest {
 
 	@Test
 	public void testHashCode() {
-		assertTrue(s.hashCode() == new XsbPrologOperatorSet().hashCode());
+		assertTrue(s.hashCode() == new InterPrologOperatorSet().hashCode());
 		// assertTrue(s.hashCode() == new String().hashCode());
 		// assertTrue(s.hashCode() == ((String) null).hashCode());
 	}

@@ -24,9 +24,15 @@ import org.logicware.prolog.PrologEngine;
 import org.logicware.prolog.PrologProvider;
 import org.worklogic.prolog.interprolog.InterPrologProvider;
 
+import com.declarativa.interprolog.AbstractPrologEngine;
 import com.declarativa.interprolog.TermModel;
+import com.declarativa.interprolog.XSBSubprocessEngine;
 
 public class XsbProlog extends InterPrologProvider implements PrologProvider {
+
+	// path to binary engine directory
+	private static String xsbPath = "C:\\Program Files (x86)\\XSB\\bin";
+//		private static String xsbPath = "C:\\Program Files (x86)\\XSB\\config\\x64-pc-windows\\bin";
 
 	public XsbProlog() {
 		super(new XsbPrologConverter());
@@ -37,7 +43,9 @@ public class XsbProlog extends InterPrologProvider implements PrologProvider {
 	}
 
 	public PrologEngine newEngine() {
-		return new XsbPrologEngine(this);
+//			AbstractPrologEngine engine = new NativeEngine(xsbPath);
+		AbstractPrologEngine engine = new XSBSubprocessEngine(xsbPath);
+		return new XsbPrologEngine(this, engine);
 	}
 
 	@Override
