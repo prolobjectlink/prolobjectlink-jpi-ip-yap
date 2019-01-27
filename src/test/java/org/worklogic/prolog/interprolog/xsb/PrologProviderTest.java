@@ -2,7 +2,7 @@
  * #%L
  * prolobjectlink-jpi-ip-xsb
  * %%
- * Copyright (C) 2012 - 2017 WorkLogic Project
+ * Copyright (C) 2019 Prolobjectlink Project
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,15 +34,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.logicware.prolog.PrologAtom;
-import org.logicware.prolog.PrologDouble;
 import org.logicware.prolog.PrologFloat;
 import org.logicware.prolog.PrologInteger;
 import org.logicware.prolog.PrologList;
 import org.logicware.prolog.PrologStructure;
 import org.logicware.prolog.PrologTerm;
 import org.logicware.prolog.PrologVariable;
-import org.worklogic.prolog.interprolog.xsb.XsbProlog;
-import org.worklogic.prolog.interprolog.xsb.XsbPrologConverter;
 
 public class PrologProviderTest extends PrologBaseTest {
 
@@ -308,11 +305,8 @@ public class PrologProviderTest extends PrologBaseTest {
 		PrologAtom complex_atom = (PrologAtom) provider.parseTerm("'an complex atom'");
 		assertEquals(provider.newAtom("an complex atom"), complex_atom);
 
-		// IPrologFloat f = (IPrologFloat) factory.parseTerm("3.14");
-		// assertEquals(new FloatAdapter(3.14), f);
-
-		PrologDouble d = (PrologDouble) provider.parseTerm("3.14");
-		assertEquals(provider.newInteger(3), d);
+		PrologFloat f = (PrologFloat) provider.parseTerm("3.14");
+		assertEquals(provider.newFloat(3.14), f);
 
 		PrologList list = (PrologList) provider.parseTerm("[0,1,2,3,4,5,6,7,8,9]");
 		assertEquals(provider.newList(new PrologTerm[] { zero, one, two, three, four, five, six, seven, eight, nine }),

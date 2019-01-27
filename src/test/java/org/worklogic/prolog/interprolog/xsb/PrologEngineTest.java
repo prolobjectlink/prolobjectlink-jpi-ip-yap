@@ -2,7 +2,7 @@
  * #%L
  * prolobjectlink-jpi-ip-xsb
  * %%
- * Copyright (C) 2012 - 2017 WorkLogic Project
+ * Copyright (C) 2019 Prolobjectlink Project
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,11 @@ import org.logicware.prolog.PrologStructure;
 import org.logicware.prolog.PrologTerm;
 import org.logicware.prolog.PrologVariable;
 import org.worklogic.Licenses;
-import org.worklogic.prolog.interprolog.xsb.XsbPrologEngine;
+import org.worklogic.prolog.interprolog.InterPrologEngine;
+import org.worklogic.prolog.interprolog.InterPrologOperator;
+
+import com.declarativa.interprolog.SolutionIterator;
+import com.declarativa.interprolog.TermModel;
 
 public class PrologEngineTest extends PrologBaseTest {
 
@@ -996,21 +1000,60 @@ public class PrologEngineTest extends PrologBaseTest {
 	@Test
 	public final void testOperator() {
 
-		// assertFalse(engine.currentOperator(1200, "xfx", "<=="));
-		// engine.operator(1200, "xfx", "<==");
-		// assertTrue(engine.currentOperator(1200, "xfx", "<=="));
+		assertFalse(engine.currentOperator(1200, "xfx", "<=="));
+		engine.operator(1200, "xfx", "<==");
+		assertTrue(engine.currentOperator(1200, "xfx", "<=="));
 
 	}
 
 	@Test
 	public final void testCurrentPredicates() {
+		String KEY = "X";
 		Set<PredicateIndicator> builtins = new HashSet<PredicateIndicator>();
+		String stringQuery = "findall(X/Y,current_predicate(X/Y)," + KEY + "), buildTermModel(" + KEY + ",TM)";
+		SolutionIterator si = engine.unwrap(InterPrologEngine.class).engine.goal(stringQuery, "[TM]");
+		while (si.hasNext()) {
+			Object[] bindings = si.next();
+			for (Object object : bindings) {
+				if (object instanceof TermModel) {
+					TermModel list = (TermModel) object;
+					while (list.getChildCount() > 0) {
+						TermModel solvedTerm = (TermModel) list.getChild(0);
+						String functor = (String) solvedTerm.children[0].node;
+						Integer arity = (Integer) solvedTerm.children[1].node;
+						PredicateIndicator pi = new PredicateIndicator(functor, arity);
+						list = (TermModel) list.getChild(1);
+						builtins.add(pi);
+					}
+				}
+			}
+		}
 		assertEquals(builtins, engine.currentPredicates());
 	}
 
 	@Test
 	public final void testCurrentOperators() {
+		String KEY = "X";
 		Set<PrologOperator> operators = new HashSet<PrologOperator>();
+		String stringQuery = "findall(P/S/O,current_op(P,S,O)," + KEY + "), buildTermModel(" + KEY + ",TM)";
+		SolutionIterator si = engine.unwrap(InterPrologEngine.class).engine.goal(stringQuery, "[TM]");
+		while (si.hasNext()) {
+			Object[] bindings = si.next();
+			for (Object object : bindings) {
+				if (object instanceof TermModel) {
+					TermModel list = (TermModel) object;
+					while (list.getChildCount() > 0) {
+						TermModel solvedTerm = (TermModel) list.getChild(0);
+						Integer p = (Integer) solvedTerm.children[0].children[0].node;
+						String s = (String) solvedTerm.children[0].children[1].node;
+						String n = (String) solvedTerm.children[1].node;
+						PrologOperator o = new InterPrologOperator(p, s, n);
+						list = (TermModel) list.getChild(1);
+						operators.add(o);
+					}
+				}
+			}
+		}
 		assertEquals(operators, engine.currentOperators());
 	}
 
@@ -1044,132 +1087,116 @@ public class PrologEngineTest extends PrologBaseTest {
 		assertTrue(engine.currentPredicate("department", 2));
 
 		// supported built-ins
-		assertTrue(engine.currentPredicate("agent", 2));
-		assertTrue(engine.currentPredicate("expression_bitwise_shift_left", 2));
-		assertTrue(engine.currentPredicate("add_theory", 1));
-		assertTrue(engine.currentPredicate("set_classpath", 1));
-		assertTrue(engine.currentPredicate("cos", 1));
-		assertTrue(engine.currentPredicate("read", 1));
-		assertTrue(engine.currentPredicate("agent", 1));
-		assertTrue(engine.currentPredicate("nowarning", 0));
-		assertTrue(engine.currentPredicate("expression_greater_or_equal_than", 2));
+//		assertTrue(engine.currentPredicate("agent", 2));
+//		assertTrue(engine.currentPredicate("expression_bitwise_shift_left", 2));
+//		assertTrue(engine.currentPredicate("add_theory", 1));
+//		assertTrue(engine.currentPredicate("set_classpath", 1));
+//		assertTrue(engine.currentPredicate("cos", 1));
+//		assertTrue(engine.currentPredicate("read", 1));
+//		assertTrue(engine.currentPredicate("agent", 1));
+//		assertTrue(engine.currentPredicate("nowarning", 0));
+//		assertTrue(engine.currentPredicate("expression_greater_or_equal_than", 2));
 		assertTrue(engine.currentPredicate("see", 1));
-		assertTrue(engine.currentPredicate("expression_bitwise_and", 2));
-		assertTrue(engine.currentPredicate("num_atom", 2));
-		assertTrue(engine.currentPredicate("element_guard", 3));
-		assertTrue(engine.currentPredicate("member_guard", 2));
+//		assertTrue(engine.currentPredicate("expression_bitwise_and", 2));
+//		assertTrue(engine.currentPredicate("num_atom", 2));
+//		assertTrue(engine.currentPredicate("element_guard", 3));
+//		assertTrue(engine.currentPredicate("member_guard", 2));
 		assertTrue(engine.currentPredicate("nonvar", 1));
-		assertTrue(engine.currentPredicate("abs", 1));
-		assertTrue(engine.currentPredicate("term_greater_than", 2));
-		assertTrue(engine.currentPredicate("list", 1));
-		assertTrue(engine.currentPredicate("clause_guard", 2));
-		assertTrue(engine.currentPredicate("expression_integer_div", 2));
-		assertTrue(engine.currentPredicate("tab", 1));
-		assertTrue(engine.currentPredicate("expression_less_than", 2));
-		assertTrue(engine.currentPredicate("<<", 2));
-		assertTrue(engine.currentPredicate("register", 1));
-		assertTrue(engine.currentPredicate("warning", 0));
-		assertTrue(engine.currentPredicate("retract_guard", 1));
-		assertTrue(engine.currentPredicate("get_operators_list", 1));
+//		assertTrue(engine.currentPredicate("abs", 1));
+//		assertTrue(engine.currentPredicate("term_greater_than", 2));
+//		assertTrue(engine.currentPredicate("list", 1));
+//		assertTrue(engine.currentPredicate("clause_guard", 2));
+//		assertTrue(engine.currentPredicate("expression_integer_div", 2));
+//		assertTrue(engine.currentPredicate("tab", 1));
+//		assertTrue(engine.currentPredicate("expression_less_than", 2));
+//		assertTrue(engine.currentPredicate("<<", 2));
+//		assertTrue(engine.currentPredicate("register", 1));
+//		assertTrue(engine.currentPredicate("warning", 0));
+//		assertTrue(engine.currentPredicate("retract_guard", 1));
+//		assertTrue(engine.currentPredicate("get_operators_list", 1));
 		assertTrue(engine.currentPredicate("atomic", 1));
-		assertTrue(engine.currentPredicate("unregister", 1));
-		assertTrue(engine.currentPredicate("term_equality", 2));
-		assertTrue(engine.currentPredicate("java_class", 4));
-		assertTrue(engine.currentPredicate("expression_bitwise_shift_right", 2));
-		assertTrue(engine.currentPredicate("write_base", 1));
+//		assertTrue(engine.currentPredicate("unregister", 1));
+//		assertTrue(engine.currentPredicate("term_equality", 2));
+//		assertTrue(engine.currentPredicate("java_class", 4));
+//		assertTrue(engine.currentPredicate("expression_bitwise_shift_right", 2));
+//		assertTrue(engine.currentPredicate("write_base", 1));
 		assertTrue(engine.currentPredicate("number", 1));
-		assertTrue(engine.currentPredicate("expression_less_or_equal_than", 2));
-		assertTrue(engine.currentPredicate("text_concat", 3));
-		assertTrue(engine.currentPredicate("/", 2));
+//		assertTrue(engine.currentPredicate("expression_less_or_equal_than", 2));
+//		assertTrue(engine.currentPredicate("text_concat", 3));
+//		assertTrue(engine.currentPredicate("//", 2));
 		assertTrue(engine.currentPredicate("atom_chars", 2));
-		assertTrue(engine.currentPredicate("float_fractional_part", 1));
-		assertTrue(engine.currentPredicate("text_from_file", 2));
-		assertTrue(engine.currentPredicate("expression_plus", 1));
-		assertTrue(engine.currentPredicate("expression_plus", 2));
+//		assertTrue(engine.currentPredicate("float_fractional_part", 1));
+//		assertTrue(engine.currentPredicate("text_from_file", 2));
+//		assertTrue(engine.currentPredicate("expression_plus", 1));
+//		assertTrue(engine.currentPredicate("expression_plus", 2));
 		assertTrue(engine.currentPredicate("throw", 1));
 		assertTrue(engine.currentPredicate("var", 1));
-		assertTrue(engine.currentPredicate("sign", 1));
-		assertTrue(engine.currentPredicate("java_call", 3));
-		assertTrue(engine.currentPredicate("\\/", 2));
-		assertTrue(engine.currentPredicate("mod", 2));
-		assertTrue(engine.currentPredicate("get", 1));
-		assertTrue(engine.currentPredicate("\\", 1));
-		assertTrue(engine.currentPredicate("all_solutions_predicates_guard", 3));
-		assertTrue(engine.currentPredicate("constant", 1));
-		assertTrue(engine.currentPredicate("-", 2));
-		assertTrue(engine.currentPredicate("call_guard", 1));
-		assertTrue(engine.currentPredicate("iterated_goal_term", 2));
-		assertTrue(engine.currentPredicate("delete_guard", 3));
-		assertTrue(engine.currentPredicate("-", 1));
-		assertTrue(engine.currentPredicate("load_library_from_theory", 2));
-		assertTrue(engine.currentPredicate("rem", 2));
-		assertTrue(engine.currentPredicate("rand_int", 2));
-		assertTrue(engine.currentPredicate("//", 2));
-		assertTrue(engine.currentPredicate("reverse_guard", 2));
-		assertTrue(engine.currentPredicate("+", 1));
-		assertTrue(engine.currentPredicate("sub_atom_guard", 5));
-		assertTrue(engine.currentPredicate("solve_file_goal_guard", 2));
-		assertTrue(engine.currentPredicate("+", 2));
-		assertTrue(engine.currentPredicate("expression_equality", 2));
+//		assertTrue(engine.currentPredicate("sign", 1));
+//		assertTrue(engine.currentPredicate("java_call", 3));
+//		assertTrue(engine.currentPredicate("\\/", 2));
+//		assertTrue(engine.currentPredicate("mod", 2));
+//		assertTrue(engine.currentPredicate("get", 1));
+//		assertTrue(engine.currentPredicate("\\", 1));
+//		assertTrue(engine.currentPredicate("all_solutions_predicates_guard", 3));
+//		assertTrue(engine.currentPredicate("constant", 1));
+//		assertTrue(engine.currentPredicate("-", 2));
+//		assertTrue(engine.currentPredicate("call_guard", 1));
+//		assertTrue(engine.currentPredicate("iterated_goal_term", 2));
+//		assertTrue(engine.currentPredicate("delete_guard", 3));
+//		assertTrue(engine.currentPredicate("-", 1));
+//		assertTrue(engine.currentPredicate("load_library_from_theory", 2));
+//		assertTrue(engine.currentPredicate("rem", 2));
+//		assertTrue(engine.currentPredicate("rand_int", 2));
+//		assertTrue(engine.currentPredicate("//", 2));
+//		assertTrue(engine.currentPredicate("reverse_guard", 2));
+//		assertTrue(engine.currentPredicate("+", 1));
+//		assertTrue(engine.currentPredicate("sub_atom_guard", 5));
+//		assertTrue(engine.currentPredicate("solve_file_goal_guard", 2));
+//		assertTrue(engine.currentPredicate("+", 2));
+//		assertTrue(engine.currentPredicate("expression_equality", 2));
 		assertTrue(engine.currentPredicate("char_code", 2));
-		assertTrue(engine.currentPredicate("expression_multiply", 2));
+//		assertTrue(engine.currentPredicate("expression_multiply", 2));
 		assertTrue(engine.currentPredicate("telling", 1));
 		assertTrue(engine.currentPredicate("seen", 0));
-		assertTrue(engine.currentPredicate("notrace", 0));
-		assertTrue(engine.currentPredicate(">>", 2));
+//		assertTrue(engine.currentPredicate("notrace", 0));
+//		assertTrue(engine.currentPredicate(">>", 2));
 		assertTrue(engine.currentPredicate("write", 1));
-		assertTrue(engine.currentPredicate("rand_float", 1));
-		assertTrue(engine.currentPredicate("$s_next0", 3));
-		assertTrue(engine.currentPredicate("set_seed", 1));
-		assertTrue(engine.currentPredicate("float_integer_part", 1));
+//		assertTrue(engine.currentPredicate("rand_float", 1));
+//		assertTrue(engine.currentPredicate("set_seed", 1));
+//		assertTrue(engine.currentPredicate("float_integer_part", 1));
 		assertTrue(engine.currentPredicate("integer", 1));
 		assertTrue(engine.currentPredicate("put", 1));
-		assertTrue(engine.currentPredicate("expression_bitwise_or", 2));
+//		assertTrue(engine.currentPredicate("expression_bitwise_or", 2));
 		assertTrue(engine.currentPredicate("atom_length", 2));
-		assertTrue(engine.currentPredicate("get0", 1));
-		assertTrue(engine.currentPredicate("java_array_set_primitive", 3));
-		assertTrue(engine.currentPredicate("round", 1));
-		assertTrue(engine.currentPredicate("floor", 1));
+//		assertTrue(engine.currentPredicate("get0", 1));
+//		assertTrue(engine.currentPredicate("java_array_set_primitive", 3));
+//		assertTrue(engine.currentPredicate("round", 1));
+//		assertTrue(engine.currentPredicate("floor", 1));
 		assertTrue(engine.currentPredicate("atom", 1));
-		assertTrue(engine.currentPredicate("//", 2));
-		assertTrue(engine.currentPredicate("log", 1));
-		assertTrue(engine.currentPredicate("trace", 0));
-		assertTrue(engine.currentPredicate("div", 2));
-		assertTrue(engine.currentPredicate("java_array_get_primitive", 3));
-		assertTrue(engine.currentPredicate("get_theory", 1));
+//		assertTrue(engine.currentPredicate("//", 2));
+//		assertTrue(engine.currentPredicate("log", 1));
+//		assertTrue(engine.currentPredicate("trace", 0));
+//		assertTrue(engine.currentPredicate("div", 2));
+//		assertTrue(engine.currentPredicate("java_array_get_primitive", 3));
 		assertTrue(engine.currentPredicate("told", 0));
-		assertTrue(engine.currentPredicate("atan", 1));
-		assertTrue(engine.currentPredicate("print", 1));
+//		assertTrue(engine.currentPredicate("atan", 1));
+//		assertTrue(engine.currentPredicate("print", 1));
 		assertTrue(engine.currentPredicate("float", 1));
-		assertTrue(engine.currentPredicate("get_classpath", 1));
-		assertTrue(engine.currentPredicate("**", 2));
-		assertTrue(engine.currentPredicate("sin", 1));
+//		assertTrue(engine.currentPredicate("**", 2));
+//		assertTrue(engine.currentPredicate("sin", 1));
 		assertTrue(engine.currentPredicate("ground", 1));
-		assertTrue(engine.currentPredicate("destroy_object", 1));
-		assertTrue(engine.currentPredicate("set_theory", 1));
-		assertTrue(engine.currentPredicate("exp", 1));
-		assertTrue(engine.currentPredicate("expression_div", 2));
-		assertTrue(engine.currentPredicate("arg_guard", 3));
+//		assertTrue(engine.currentPredicate("exp", 1));
 		assertTrue(engine.currentPredicate("seeing", 1));
 		assertTrue(engine.currentPredicate("nl", 0));
-		assertTrue(engine.currentPredicate("expression_minus", 2));
-		assertTrue(engine.currentPredicate("nospy", 0));
+//		assertTrue(engine.currentPredicate("nospy", 0));
 		assertTrue(engine.currentPredicate("tell", 1));
-		assertTrue(engine.currentPredicate("expression_minus", 1));
-		assertTrue(engine.currentPredicate("expression_bitwise_not", 1));
-		assertTrue(engine.currentPredicate("sqrt", 1));
-		assertTrue(engine.currentPredicate("$wt_unify", 3));
-		assertTrue(engine.currentPredicate("truncate", 1));
-		assertTrue(engine.currentPredicate("expression_pow", 2));
-		assertTrue(engine.currentPredicate("text_term", 2));
-		assertTrue(engine.currentPredicate("java_object", 3));
+//		assertTrue(engine.currentPredicate("sqrt", 1));
+//		assertTrue(engine.currentPredicate("truncate", 1));
 		// assertTrue(engine.currentPredicate("java_object", 4));
-		assertTrue(engine.currentPredicate("*", 2));
-		assertTrue(engine.currentPredicate("ceiling", 1));
-		assertTrue(engine.currentPredicate("term_less_than", 2));
-		assertTrue(engine.currentPredicate("expression_greater_than", 2));
+//		assertTrue(engine.currentPredicate("*", 2));
+//		assertTrue(engine.currentPredicate("ceiling", 1));
 		assertTrue(engine.currentPredicate("compound", 1));
-		assertTrue(engine.currentPredicate("spy", 0));
+//		assertTrue(engine.currentPredicate("spy", 0));
 
 	}
 
@@ -1184,27 +1211,25 @@ public class PrologEngineTest extends PrologBaseTest {
 		assertTrue(engine.currentOperator(400, "yfx", "/"));
 		assertTrue(engine.currentOperator(400, "yfx", "mod"));
 		assertTrue(engine.currentOperator(500, "yfx", "+"));
-		assertTrue(engine.currentOperator(200, "fx", "exp"));
-		assertTrue(engine.currentOperator(200, "fx", "cos"));
+//		assertTrue(engine.currentOperator(200, "fx", "exp"));
+//		assertTrue(engine.currentOperator(200, "fx", "cos"));
 		assertTrue(engine.currentOperator(400, "yfx", "*"));
 		assertTrue(engine.currentOperator(1050, "xfy", "->"));
 		assertTrue(engine.currentOperator(700, "xfx", ">"));
 		assertTrue(engine.currentOperator(700, "xfx", "\\="));
-		assertTrue(engine.currentOperator(200, "xfx", "as"));
+//		assertTrue(engine.currentOperator(200, "xfx", "as"));
 		assertTrue(engine.currentOperator(200, "xfy", "^"));
-		assertTrue(engine.currentOperator(300, "yfx", "div"));
+//		assertTrue(engine.currentOperator(300, "yfx", "div"));
 		assertTrue(engine.currentOperator(700, "xfx", "@<"));
 		assertTrue(engine.currentOperator(1100, "xfy", ";"));
 		assertTrue(engine.currentOperator(700, "xfx", "=<"));
 		assertTrue(engine.currentOperator(1200, "fx", ":-"));
-		assertTrue(engine.currentOperator(600, "xfx", "."));
+//		assertTrue(engine.currentOperator(600, "xfx", "."));
 		assertTrue(engine.currentOperator(700, "xfx", "=\\="));
 		assertTrue(engine.currentOperator(200, "fy", "-"));
-		assertTrue(engine.currentOperator(200, "fx", "sin"));
+//		assertTrue(engine.currentOperator(200, "fx", "sin"));
 		assertTrue(engine.currentOperator(700, "xfx", "="));
-		assertTrue(engine.currentOperator(800, "xfx", "<-"));
-		assertTrue(engine.currentOperator(200, "fx", "log"));
-		assertTrue(engine.currentOperator(850, "xfx", "returns"));
+//		assertTrue(engine.currentOperator(200, "fx", "log"));
 		assertTrue(engine.currentOperator(700, "xfx", ">="));
 		assertTrue(engine.currentOperator(700, "xfx", "@=<"));
 		assertTrue(engine.currentOperator(400, "yfx", ">>"));
@@ -1215,14 +1240,14 @@ public class PrologEngineTest extends PrologBaseTest {
 		assertTrue(engine.currentOperator(700, "xfx", "<"));
 		assertTrue(engine.currentOperator(700, "xfx", "=:="));
 		assertTrue(engine.currentOperator(900, "fy", "\\+"));
-		assertTrue(engine.currentOperator(200, "fx", "sqrt"));
-		assertTrue(engine.currentOperator(1000, "xfy", ","));
+//		assertTrue(engine.currentOperator(200, "fx", "sqrt"));
+//		assertTrue(engine.currentOperator(1000, "xfy", ","));
 		assertTrue(engine.currentOperator(700, "xfx", "@>"));
 		assertTrue(engine.currentOperator(200, "fy", "\\"));
 		assertTrue(engine.currentOperator(400, "yfx", "//"));
 		assertTrue(engine.currentOperator(700, "xfx", "@>="));
 		assertTrue(engine.currentOperator(400, "yfx", "rem"));
-		assertTrue(engine.currentOperator(200, "fx", "atan"));
+//		assertTrue(engine.currentOperator(200, "fx", "atan"));
 		assertTrue(engine.currentOperator(1200, "xfx", ":-"));
 		assertTrue(engine.currentOperator(500, "yfx", "\\/"));
 		assertTrue(engine.currentOperator(500, "yfx", "/\\"));
@@ -1236,12 +1261,12 @@ public class PrologEngineTest extends PrologBaseTest {
 
 	@Test
 	public final void testGetVersion() {
-		assertEquals(engine.unwrap(XsbPrologEngine.class).engine.getPrologVersion(), engine.getVersion());
+		assertEquals(engine.unwrap(XsbPrologEngine.class).engine.getPrologNumericVersion(), engine.getVersion());
 	}
 
 	@Test
 	public final void testGetName() {
-		assertEquals("tuprolog", engine.getName());
+		assertEquals("XSB Prolog", engine.getName());
 	}
 
 	@Test
