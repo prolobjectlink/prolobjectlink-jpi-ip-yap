@@ -1,56 +1,36 @@
-sister(X,Y) :-
-	parent(Z,X),
-	parent(Z,Y),
-	female(X),
-	different(X,Y).
-
-predecessor(X,Z) :-
-	parent(X,Z).
-
-predecessor(X,Z) :-
-	parent(X,Y),
-	predecessor(Y,Z).
-
 parent(pam,bob).
-
 parent(tom,bob).
-
 parent(tom,liz).
-
 parent(bob,ann).
-
 parent(bob,pat).
-
 parent(pat,jim).
 
-male(tom).
-
-male(bob).
-
-male(jim).
-
 female(pam).
-
 female(liz).
-
 female(ann).
-
 female(pat).
 
-mother(X,Y) :-
-	parent(X,Y),
-	female(X).
+male(tom).
+male(bob).
+male(jim).
 
-grandparent(X,Z) :-
-	parent(X,Y),
-	parent(Y,Z).
+offspring(Var0,Var0) :- 
+	parent(Var8,Var8).
 
-offspring(X,Y) :-
-	parent(X,Y).
+mother(Var0,Var0) :- 
+	op(1000, xfy, ',').(parent(Var8,Var8),female(Var8)).
 
-different(X,X) :-
-	!,
-	fail.
+grandparent(Var0,Var0) :- 
+	op(1000, xfy, ',').(parent(Var8,Var8),parent(Var8,Var8)).
 
-different(X,Y).
+sister(Var0,Var0) :- 
+	op(1000, xfy, ',').(parent(Var8,Var8),op(1000, xfy, ',').(parent(Var8,Var8),op(1000, xfy, ',').(female(Var8),different(Var8,Var8)))).
 
+different(Var0,Var0) :- 
+	op(1000, xfy, ',').(!,fail).
+different(Var0,Var0).
+
+predecessor(Var0,Var0) :- 
+	parent(Var8,Var8).
+predecessor(Var0,Var0) :- 
+	op(1000, xfy, ',').(parent(Var8,Var8),predecessor(Var8,Var8)).
