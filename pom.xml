@@ -237,7 +237,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<mainClass>
-								org.worklogic.prolog.interprolog.xsb.XsbPrologConsole
+								org.prolobjectlink.prolog.interprolog.xsb.XsbPrologConsole
 							</mainClass>
 						</manifest>
 						<manifestEntries>
