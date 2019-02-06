@@ -200,7 +200,7 @@ public class PrologIntegerTest extends PrologBaseTest {
 		PrologLong lValue = provider.newLong(28);
 		PrologLong lValue1 = provider.newLong(100);
 		// true because are equals
-		assertTrue(iValue.unify(lValue));
+		assertFalse(iValue.unify(lValue));
 		// false because they are different
 		assertFalse(iValue.unify(lValue1));
 

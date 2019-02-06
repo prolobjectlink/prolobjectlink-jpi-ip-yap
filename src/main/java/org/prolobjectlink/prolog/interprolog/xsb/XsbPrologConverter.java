@@ -31,4 +31,11 @@ public class XsbPrologConverter extends InterPrologConverter implements PrologCo
 		return new XsbProlog(this);
 	}
 
+	@Override
+	public String toString() {
+		return "XsbPrologConverter";
+	}
+	
+	
+
 }

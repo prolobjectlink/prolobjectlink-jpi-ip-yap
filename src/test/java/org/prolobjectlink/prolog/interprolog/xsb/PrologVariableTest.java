@@ -236,7 +236,7 @@ public class PrologVariableTest extends PrologBaseTest {
 		PrologVariable y = provider.newVariable("Y", 0);
 		assertEquals(0, variable.compareTo(variable)); // are
 		// equals
-		assertEquals(1, variable.compareTo(y)); // alphabetic
+		assertEquals(0, variable.compareTo(y)); // alphabetic
 		// substitution
 
 		variable = provider.newVariable("X", 0);

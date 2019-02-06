@@ -24,12 +24,10 @@ import org.prolobjectlink.prolog.PrologEngine;
 import org.prolobjectlink.prolog.PrologProvider;
 import org.prolobjectlink.prolog.interprolog.InterPrologEngine;
 
-import com.declarativa.interprolog.AbstractPrologEngine;
-
 public class XsbPrologEngine extends InterPrologEngine implements PrologEngine {
 
-	public XsbPrologEngine(PrologProvider provider, AbstractPrologEngine engine) {
-		super(provider, engine);
+	public XsbPrologEngine(PrologProvider provider) {
+		super(provider);
 	}
 
 	public final String getLicense() {
