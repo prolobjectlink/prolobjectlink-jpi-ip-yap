@@ -52,7 +52,6 @@ import org.prolobjectlink.prolog.interprolog.InterPrologOperator;
 import com.declarativa.interprolog.SolutionIterator;
 import com.declarativa.interprolog.TermModel;
 
-@Ignore
 public class PrologEngineTest extends PrologBaseTest {
 
 	private PrologEngine engine;
@@ -447,6 +446,7 @@ public class PrologEngineTest extends PrologBaseTest {
 	}
 
 	@Test
+	@Ignore
 	public final void testClauseIPrologTerm() {
 		engine.assertz("parent( pam, bob)");
 		engine.assertz("parent( tom, bob)");
@@ -1009,6 +1009,7 @@ public class PrologEngineTest extends PrologBaseTest {
 	}
 
 	@Test
+	@Ignore
 	public final void testCurrentPredicates() {
 		String KEY = "X";
 		Set<PredicateIndicator> builtins = new HashSet<PredicateIndicator>();
@@ -1035,6 +1036,7 @@ public class PrologEngineTest extends PrologBaseTest {
 	}
 
 	@Test
+	@Ignore
 	public final void testCurrentOperators() {
 		String KEY = "X";
 		Set<PrologOperator> operators = new HashSet<PrologOperator>();
@@ -1282,6 +1284,7 @@ public class PrologEngineTest extends PrologBaseTest {
 	}
 
 	@Test
+	@Ignore
 	public final void testIterator() {
 
 		engine = provider.newEngine();
