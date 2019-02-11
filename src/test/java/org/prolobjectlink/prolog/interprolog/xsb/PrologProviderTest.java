@@ -318,13 +318,12 @@ public class PrologProviderTest extends PrologBaseTest {
 		assertEquals(provider.newStructure("digits", zero, one, two, three, four, five, six, seven, eight, nine),
 				structure);
 
-		PrologStructure complex_structure = (PrologStructure) provider.parseTerm("'digits'(0,1,2,3,4,5,6,7,8,9)");
-		assertEquals(provider.newStructure("digits", zero, one, two, three, four, five, six, seven, eight, nine),
+		PrologStructure complex_structure = (PrologStructure) provider.parseTerm("'digits structure'(0,1,2,3,4,5,6,7,8,9)");
+		assertEquals(provider.newStructure("'digits structure'", zero, one, two, three, four, five, six, seven, eight, nine),
 				complex_structure);
 
-		// PrologExpression expression = (PrologExpression)
-		// provider.parsePrologTerm("X+Y");
-		// assertEquals(provider.newExpression(x, "+", y), expression);
+		PrologTerm expression = provider.parseTerm("X+Y");
+		assertEquals(provider.newStructure(x, "+", y), expression);
 
 	}
 
