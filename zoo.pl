@@ -10,6 +10,6 @@ black(cat).
 gray(elephant).
 
 dark(Var0) :- 
-	black(Var7).
+	black(Var0).
 dark(Var0) :- 
-	brown(Var7).
+	brown(Var0).

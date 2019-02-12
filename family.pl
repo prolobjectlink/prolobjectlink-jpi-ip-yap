@@ -15,22 +15,28 @@ male(bob).
 male(jim).
 
 offspring(Var0,Var0) :- 
-	parent(Var8,Var8).
+	parent(Var0,Var0).
 
 mother(Var0,Var0) :- 
-	parent(Var8,Var8),female(Var8).
+	parent(Var0,Var0),
+	female(Var0).
 
 grandparent(Var0,Var0) :- 
-	parent(Var8,Var8),parent(Var8,Var8).
+	parent(Var0,Var0),
+	parent(Var0,Var0).
 
 sister(Var0,Var0) :- 
-	parent(Var8,Var8),parent(Var8,Var8),female(Var8),different(Var8,Var8).
+	parent(Var0,Var0),
+	parent(Var0,Var0),
+	female(Var0),
+	different(Var0,Var0).
 
 different(Var0,Var0) :- 
-	!,fail.
+	!.
 different(Var0,Var0).
 
 predecessor(Var0,Var0) :- 
-	parent(Var8,Var8).
+	parent(Var0,Var0).
 predecessor(Var0,Var0) :- 
-	parent(Var8,Var8),predecessor(Var8,Var8).
+	parent(Var0,Var0),
+	predecessor(Var0,Var0).
