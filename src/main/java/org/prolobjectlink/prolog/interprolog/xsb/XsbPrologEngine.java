@@ -19,7 +19,7 @@
  */
 package org.prolobjectlink.prolog.interprolog.xsb;
 
-import org.prolobjectlink.Licenses;
+import org.prolobjectlink.prolog.Licenses;
 import org.prolobjectlink.prolog.PrologEngine;
 import org.prolobjectlink.prolog.PrologProvider;
 import org.prolobjectlink.prolog.interprolog.InterPrologEngine;
