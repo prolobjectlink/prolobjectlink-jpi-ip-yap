@@ -1014,7 +1014,6 @@ public class PrologEngineTest extends PrologBaseTest {
 		String KEY = "X";
 		Set<PredicateIndicator> builtins = new HashSet<PredicateIndicator>();
 		String stringQuery = "findall(X/Y,current_predicate(X/Y)," + KEY + "), buildTermModel(" + KEY + ",TM)";
-		engine.unwrap(InterPrologEngine.class);
 		SolutionIterator si = InterPrologEngine.engine.goal(stringQuery, "[TM]");
 		while (si.hasNext()) {
 			Object[] bindings = si.next();
@@ -1041,7 +1040,6 @@ public class PrologEngineTest extends PrologBaseTest {
 		String KEY = "X";
 		Set<PrologOperator> operators = new HashSet<PrologOperator>();
 		String stringQuery = "findall(P/S/O,current_op(P,S,O)," + KEY + "), buildTermModel(" + KEY + ",TM)";
-		engine.unwrap(InterPrologEngine.class);
 		SolutionIterator si = InterPrologEngine.engine.goal(stringQuery, "[TM]");
 		while (si.hasNext()) {
 			Object[] bindings = si.next();
@@ -1267,7 +1265,6 @@ public class PrologEngineTest extends PrologBaseTest {
 
 	@Test
 	public final void testGetVersion() {
-		engine.unwrap(XsbPrologEngine.class);
 		assertEquals(InterPrologEngine.engine.getPrologNumericVersion(), engine.getVersion());
 	}
 
