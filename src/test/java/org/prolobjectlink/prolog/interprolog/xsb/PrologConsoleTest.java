@@ -1,6 +1,6 @@
 /*
  * #%L
- * prolobjectlink-jpi-jtrolog
+ * prolobjectlink-jpi-ip-xsb
  * %%
  * Copyright (C) 2012 - 2019 Prolobjectlink Project
  * %%
