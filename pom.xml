@@ -94,6 +94,13 @@
 			<version>[1.0.0, )</version>
 		</dependency>
 		<dependency>
+			<groupId>com.declarativa.interprolog</groupId>
+			<artifactId>interprolog-2016.jar</artifactId>
+			<version>312e07a</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/interprolog-2016.jar</systemPath>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>[4.10, )</version>
