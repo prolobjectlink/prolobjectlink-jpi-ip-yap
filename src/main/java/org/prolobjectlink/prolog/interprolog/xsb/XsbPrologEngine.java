@@ -19,6 +19,8 @@
  */
 package org.prolobjectlink.prolog.interprolog.xsb;
 
+import java.util.List;
+
 import org.prolobjectlink.prolog.Licenses;
 import org.prolobjectlink.prolog.PrologEngine;
 import org.prolobjectlink.prolog.PrologProvider;
@@ -40,6 +42,11 @@ public class XsbPrologEngine extends InterPrologEngine implements PrologEngine {
 
 	public final String getName() {
 		return "XSB Prolog";
+	}
+
+	public List<String> verify() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
