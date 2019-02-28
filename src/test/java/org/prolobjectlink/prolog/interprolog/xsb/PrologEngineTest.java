@@ -38,7 +38,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.prolobjectlink.prolog.Licenses;
-import org.prolobjectlink.prolog.PredicateIndicator;
 import org.prolobjectlink.prolog.PrologAtom;
 import org.prolobjectlink.prolog.PrologEngine;
 import org.prolobjectlink.prolog.PrologOperator;
@@ -47,6 +46,7 @@ import org.prolobjectlink.prolog.PrologStructure;
 import org.prolobjectlink.prolog.PrologTerm;
 import org.prolobjectlink.prolog.PrologVariable;
 import org.prolobjectlink.prolog.interprolog.InterPrologEngine;
+import org.prolobjectlink.prolog.interprolog.InterPrologIndicator;
 import org.prolobjectlink.prolog.interprolog.InterPrologOperator;
 
 import com.declarativa.interprolog.SolutionIterator;
@@ -1013,7 +1013,7 @@ public class PrologEngineTest extends PrologBaseTest {
 	@Ignore
 	public final void testCurrentPredicates() {
 		String KEY = "X";
-		Set<PredicateIndicator> builtins = new HashSet<PredicateIndicator>();
+		Set<InterPrologIndicator> builtins = new HashSet<InterPrologIndicator>();
 		String stringQuery = "findall(X/Y,current_predicate(X/Y)," + KEY + "), buildTermModel(" + KEY + ",TM)";
 		SolutionIterator si = InterPrologEngine.engine.goal(stringQuery, "[TM]");
 		while (si.hasNext()) {
@@ -1025,7 +1025,7 @@ public class PrologEngineTest extends PrologBaseTest {
 						TermModel solvedTerm = (TermModel) list.getChild(0);
 						String functor = (String) solvedTerm.children[0].node;
 						Integer arity = (Integer) solvedTerm.children[1].node;
-						PredicateIndicator pi = new PredicateIndicator(functor, arity);
+						InterPrologIndicator pi = new InterPrologIndicator(functor, arity);
 						list = (TermModel) list.getChild(1);
 						builtins.add(pi);
 					}
