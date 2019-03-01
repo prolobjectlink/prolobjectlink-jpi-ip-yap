@@ -52,7 +52,6 @@ import org.prolobjectlink.prolog.interprolog.InterPrologOperator;
 import com.declarativa.interprolog.SolutionIterator;
 import com.declarativa.interprolog.TermModel;
 
-@Ignore
 public class PrologEngineTest extends PrologBaseTest {
 
 	private PrologEngine engine;
