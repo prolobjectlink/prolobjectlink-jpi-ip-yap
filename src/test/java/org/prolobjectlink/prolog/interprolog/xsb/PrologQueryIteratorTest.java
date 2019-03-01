@@ -92,7 +92,6 @@ public class PrologQueryIteratorTest extends PrologBaseTest {
 	}
 
 	@Test
-	@Ignore
 	public final void testNext() {
 		assertEquals(Arrays.asList(board, threeThousand, five, mcardon, one), new ArrayList<PrologTerm>(i.next()));
 		assertEquals(Arrays.asList(human_resources, twoThousand, three, treeman, two),

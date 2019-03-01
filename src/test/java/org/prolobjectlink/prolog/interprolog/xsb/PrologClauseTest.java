@@ -243,7 +243,6 @@ public class PrologClauseTest extends PrologBaseTest {
 	}
 
 	@Test
-	@Ignore
 	public void testToString() {
 		engine.assertz(provider.newStructure(grandparent, x, z), provider.newStructure(parent, x, y),
 				provider.newStructure(parent, y, z));

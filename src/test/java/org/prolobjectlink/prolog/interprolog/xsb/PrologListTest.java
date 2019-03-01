@@ -30,7 +30,6 @@ import java.util.Iterator;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.prolobjectlink.prolog.PrologAtom;
 import org.prolobjectlink.prolog.PrologDouble;
@@ -317,7 +316,6 @@ public class PrologListTest extends PrologBaseTest {
 	}
 
 	@Test
-	@Ignore
 	public final void testMatch() {
 
 		PrologList flattened = provider.parseList("[a,b,c]");

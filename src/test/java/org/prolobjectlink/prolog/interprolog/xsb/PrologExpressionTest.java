@@ -143,7 +143,6 @@ public class PrologExpressionTest extends PrologBaseTest {
 	}
 
 	@Test
-	@Ignore
 	public final void testUnify() {
 
 		PrologTerm expression = provider.parseTerm("58+93*10");

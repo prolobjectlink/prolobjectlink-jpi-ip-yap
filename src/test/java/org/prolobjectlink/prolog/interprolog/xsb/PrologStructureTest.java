@@ -253,7 +253,6 @@ public class PrologStructureTest extends PrologBaseTest {
 	}
 
 	@Test
-	@Ignore
 	public final void testMatch() {
 
 		// with atom
