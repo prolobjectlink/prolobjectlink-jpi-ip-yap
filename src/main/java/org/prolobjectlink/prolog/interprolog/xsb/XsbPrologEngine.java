@@ -26,6 +26,11 @@ import org.prolobjectlink.prolog.PrologEngine;
 import org.prolobjectlink.prolog.PrologProvider;
 import org.prolobjectlink.prolog.interprolog.InterPrologEngine;
 
+/**
+ * 
+ * @author Jose Zalacain
+ * @since 1.0
+ */
 public class XsbPrologEngine extends InterPrologEngine implements PrologEngine {
 
 	public XsbPrologEngine(PrologProvider provider) {

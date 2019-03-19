@@ -25,6 +25,11 @@ import org.prolobjectlink.prolog.interprolog.InterPrologConverter;
 
 import com.declarativa.interprolog.TermModel;
 
+/**
+ * 
+ * @author Jose Zalacain
+ * @since 1.0
+ */
 public class XsbPrologConverter extends InterPrologConverter implements PrologConverter<TermModel> {
 
 	public PrologProvider createProvider() {
