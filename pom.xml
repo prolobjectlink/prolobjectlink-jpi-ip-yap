@@ -250,12 +250,12 @@
 						</manifestEntries>
 						<manifestSections>
 							<manifestSection>
-								<name>Prolobjectlink-JPI-TuProlog</name>
+								<name>Prolobjectlink-JPI-XSBProlog</name>
 								<manifestEntries>
-									<Specification-Title>Prolobjectlink-JPI-TuProlog Library</Specification-Title>
+									<Specification-Title>Prolobjectlink-JPI-XSBProlog Library</Specification-Title>
 									<Specification-Version>${project.version}</Specification-Version>
 									<Specification-Vendor>Prolobjectlink Project</Specification-Vendor>
-									<Implementation-Title>Prolobjectlink-JPI-TuProlog</Implementation-Title>
+									<Implementation-Title>Prolobjectlink-JPI-XSBProlog</Implementation-Title>
 									<Implementation-Version>${project.version}</Implementation-Version>
 									<Implementation-Vendor>Prolobjectlink Project</Implementation-Vendor>
 								</manifestEntries>
