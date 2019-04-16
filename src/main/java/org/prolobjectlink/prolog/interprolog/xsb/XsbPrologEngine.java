@@ -23,7 +23,6 @@ import java.util.List;
 
 import org.prolobjectlink.prolog.Licenses;
 import org.prolobjectlink.prolog.PrologEngine;
-import org.prolobjectlink.prolog.PrologProgrammer;
 import org.prolobjectlink.prolog.PrologProvider;
 import org.prolobjectlink.prolog.interprolog.InterPrologEngine;
 
@@ -36,10 +35,6 @@ public class XsbPrologEngine extends InterPrologEngine implements PrologEngine {
 
 	public XsbPrologEngine(PrologProvider provider) {
 		super(provider);
-	}
-
-	public final PrologProgrammer getProgrammer() {
-		return new XsbPrologProgrammer(provider);
 	}
 
 	public final String getLicense() {
