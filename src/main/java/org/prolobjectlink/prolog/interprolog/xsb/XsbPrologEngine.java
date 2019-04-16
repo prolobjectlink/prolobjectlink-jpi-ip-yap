@@ -33,7 +33,7 @@ import org.prolobjectlink.prolog.interprolog.InterPrologEngine;
  */
 public class XsbPrologEngine extends InterPrologEngine implements PrologEngine {
 
-	public XsbPrologEngine(PrologProvider provider) {
+	protected XsbPrologEngine(PrologProvider provider) {
 		super(provider);
 	}
 
