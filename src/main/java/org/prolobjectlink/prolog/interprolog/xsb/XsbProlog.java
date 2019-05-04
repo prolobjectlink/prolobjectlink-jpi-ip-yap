@@ -19,10 +19,13 @@
  */
 package org.prolobjectlink.prolog.interprolog.xsb;
 
+import javax.script.ScriptEngineFactory;
+
 import org.prolobjectlink.prolog.PrologConverter;
 import org.prolobjectlink.prolog.PrologEngine;
 import org.prolobjectlink.prolog.PrologProvider;
 import org.prolobjectlink.prolog.interprolog.InterPrologProvider;
+import org.prolobjectlink.prolog.interprolog.InterPrologScriptFactory;
 
 import com.declarativa.interprolog.TermModel;
 
@@ -39,6 +42,10 @@ public class XsbProlog extends InterPrologProvider implements PrologProvider {
 
 	public XsbProlog(PrologConverter<TermModel> converter) {
 		super(converter);
+	}
+
+	public final ScriptEngineFactory getScriptFactory() {
+		return new XsbPrologScriptFactory(newEngine());
 	}
 
 	public PrologEngine newEngine() {
