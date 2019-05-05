@@ -56,7 +56,7 @@ public class XsbPrologEngine extends InterPrologEngine implements PrologEngine {
 		return "XSB Prolog";
 	}
 
-	public List<String> verify() {
+	public final List<String> verify() {
 		// TODO Auto-generated method stub
 		return null;
 	}
