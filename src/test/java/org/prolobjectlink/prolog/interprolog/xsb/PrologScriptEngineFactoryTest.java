@@ -33,7 +33,7 @@ import org.junit.Test;
 
 public class PrologScriptEngineFactoryTest extends PrologBaseTest {
 
-	private ScriptEngineFactory sef = provider.getScriptFactory();
+	private ScriptEngineFactory sef = manager.getEngineByName(provider.getName()).getFactory();
 
 	@Test
 	public void testGetEngineName() {
@@ -110,9 +110,9 @@ public class PrologScriptEngineFactoryTest extends PrologBaseTest {
 		assertNotNull(sef.getScriptEngine());
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void testGetMethodCallSyntax() {
-		assertEquals("", sef.getMethodCallSyntax("OBJ1", "equals", "OBJ2"));
+		assertEquals("bsf_invoke(Result, OBJ1, equals, [OBJ2]).", sef.getMethodCallSyntax("OBJ1", "equals", "OBJ2"));
 	}
 
 }

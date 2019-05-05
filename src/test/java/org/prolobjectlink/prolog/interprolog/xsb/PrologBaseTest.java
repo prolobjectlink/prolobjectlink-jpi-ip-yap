@@ -22,6 +22,8 @@ package org.prolobjectlink.prolog.interprolog.xsb;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.script.ScriptEngineManager;
+
 import org.prolobjectlink.prolog.Prolog;
 import org.prolobjectlink.prolog.PrologAtom;
 import org.prolobjectlink.prolog.PrologDouble;
@@ -30,7 +32,6 @@ import org.prolobjectlink.prolog.PrologInteger;
 import org.prolobjectlink.prolog.PrologProvider;
 import org.prolobjectlink.prolog.PrologTerm;
 import org.prolobjectlink.prolog.PrologVariable;
-import org.prolobjectlink.prolog.interprolog.xsb.XsbProlog;
 
 /** @author Jose Zalacain @since 1.0 */
 public abstract class PrologBaseTest {
@@ -50,6 +51,7 @@ public abstract class PrologBaseTest {
 	protected String department = "department";
 
 	protected static final PrologProvider provider = Prolog.getProvider(XsbProlog.class);
+	protected static final ScriptEngineManager manager = new ScriptEngineManager();
 
 	protected PrologTerm nil = provider.prologNil();
 	protected PrologTerm empty = provider.prologEmpty();
