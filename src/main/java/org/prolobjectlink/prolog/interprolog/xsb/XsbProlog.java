@@ -25,7 +25,6 @@ import org.prolobjectlink.prolog.PrologConverter;
 import org.prolobjectlink.prolog.PrologEngine;
 import org.prolobjectlink.prolog.PrologProvider;
 import org.prolobjectlink.prolog.interprolog.InterPrologProvider;
-import org.prolobjectlink.prolog.interprolog.InterPrologScriptFactory;
 
 import com.declarativa.interprolog.TermModel;
 

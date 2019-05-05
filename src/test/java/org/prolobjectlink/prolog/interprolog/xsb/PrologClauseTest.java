@@ -27,7 +27,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.prolobjectlink.prolog.PrologClause;
 import org.prolobjectlink.prolog.PrologEngine;

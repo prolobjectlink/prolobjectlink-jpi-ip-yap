@@ -40,8 +40,6 @@ import org.prolobjectlink.prolog.PrologList;
 import org.prolobjectlink.prolog.PrologStructure;
 import org.prolobjectlink.prolog.PrologTerm;
 import org.prolobjectlink.prolog.PrologVariable;
-import org.prolobjectlink.prolog.interprolog.xsb.XsbProlog;
-import org.prolobjectlink.prolog.interprolog.xsb.XsbPrologConverter;
 
 public class PrologProviderTest extends PrologBaseTest {
 
