@@ -21,12 +21,9 @@ package org.prolobjectlink.prolog.interprolog.xsb;
 
 import java.util.List;
 
-import javax.script.ScriptEngine;
-
 import org.prolobjectlink.prolog.Licenses;
 import org.prolobjectlink.prolog.PrologEngine;
 import org.prolobjectlink.prolog.PrologProvider;
-import org.prolobjectlink.prolog.PrologScriptEngine;
 import org.prolobjectlink.prolog.interprolog.InterPrologEngine;
 
 /**
@@ -38,10 +35,6 @@ public class XsbPrologEngine extends InterPrologEngine implements PrologEngine {
 
 	protected XsbPrologEngine(PrologProvider provider) {
 		super(provider);
-	}
-
-	public final ScriptEngine getPrologScript() {
-		return new PrologScriptEngine(new XsbPrologScriptFactory(this), this);
 	}
 
 	public final String getLicense() {
