@@ -19,8 +19,6 @@
  */
 package org.prolobjectlink.prolog.interprolog.xsb;
 
-import javax.script.ScriptEngineFactory;
-
 import org.prolobjectlink.prolog.PrologConverter;
 import org.prolobjectlink.prolog.PrologEngine;
 import org.prolobjectlink.prolog.PrologJavaConverter;
@@ -46,10 +44,6 @@ public class XsbProlog extends InterPrologProvider implements PrologProvider {
 
 	public PrologJavaConverter getJavaConverter() {
 		return new XsbPrologJavaConverter(this);
-	}
-
-	public ScriptEngineFactory getScriptFactory() {
-		return new XsbPrologScriptFactory(newEngine());
 	}
 
 	public PrologEngine newEngine() {
