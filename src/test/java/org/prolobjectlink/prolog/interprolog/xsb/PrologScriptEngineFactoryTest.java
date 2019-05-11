@@ -110,9 +110,9 @@ public class PrologScriptEngineFactoryTest extends PrologBaseTest {
 		assertNotNull(sef.getScriptEngine());
 	}
 
-	@Test
+	@Test(expected = UnsupportedOperationException.class)
 	public void testGetMethodCallSyntax() {
-		assertEquals("bsf_invoke(Result, OBJ1, equals, [OBJ2]).", sef.getMethodCallSyntax("OBJ1", "equals", "OBJ2"));
+		assertEquals("", sef.getMethodCallSyntax("OBJ1", "equals", "OBJ2"));
 	}
 
 }
