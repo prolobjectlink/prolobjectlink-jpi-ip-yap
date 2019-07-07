@@ -38,7 +38,7 @@ public class XsbProlog extends InterPrologProvider implements PrologProvider {
 		super(new XsbPrologConverter());
 	}
 
-	public XsbProlog(PrologConverter<TermModel> converter) {
+	XsbProlog(PrologConverter<TermModel> converter) {
 		super(converter);
 	}
 
@@ -48,6 +48,12 @@ public class XsbProlog extends InterPrologProvider implements PrologProvider {
 
 	public PrologEngine newEngine() {
 		return new XsbPrologEngine(this);
+	}
+
+	public PrologEngine newEngine(String path) {
+		PrologEngine engine = newEngine();
+		engine.consult(path);
+		return engine;
 	}
 
 	@Override
