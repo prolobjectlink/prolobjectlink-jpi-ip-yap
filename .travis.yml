@@ -5,31 +5,31 @@ addons:
   apt:
     packages:
       - build-essential 
-		  - cmake 
-		  - ninja-build
-		  - pkg-config
+      - cmake 
+      - ninja-build
+      - pkg-config
       - ncurses-dev
-		  - libreadline-dev
-		  - libedit-dev
+      - libreadline-dev
+      - libedit-dev
       - libunwind-dev
       - libgmp-dev
       - libssl-dev
       - unixodbc-dev
       - zlib1g-dev
-		  - libarchive-dev
+      - libarchive-dev
       - libossp-uuid-dev
       - libxext-dev
-		  - libice-dev
-		  - libjpeg-dev
-		  - libxinerama-dev
-		  - libxft-dev
+      - libice-dev
+      - libjpeg-dev
+      - libxinerama-dev
+      - libxft-dev
       - libxpm-dev
-		  - libxt-dev
+      - libxt-dev
       - libdb-dev
       - libpcre3-dev
       - libyaml-dev
       - openjdk-8-jdk
-		  - junit
+      - junit
 
 before_install:
   - wget https://archive.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.zip
