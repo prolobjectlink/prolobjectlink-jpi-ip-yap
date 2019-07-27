@@ -55,6 +55,8 @@ before_install:
   - cd XSB/build/
   - ./configure
   - ./makexsb
+  - cd ..
+  - cd ..
   - wget https://www.dropbox.com/s/m4pgwk81p3w9cxr/interprolog.jar?dl=0 -O /home/travis/build/prolobjectlink/prolobjectlink-jpi-ip-xsb/interprolog.jar
   - mvn install:install-file -Dfile=interprolog.jar -DgroupId=com.declarativa.interprolog -DartifactId=interprolog -Dversion=2.2a4 -Dpackaging=jar
 
