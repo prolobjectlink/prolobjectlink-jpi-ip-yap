@@ -52,8 +52,7 @@ before_install:
   - echo "MAVEN_OPTS='-Dmaven.repo.local=$HOME/.m2/repository -Xmx1g -Dorg.slf4j.simpleLogger.showDateTime=true -Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss:SSS'" > ~/.mavenrc
   - wget http://xsb.sourceforge.net/downloads/XSB.tar.gz
   - tar -xzvf XSB.tar.gz
-  - cd XSB
-  - cd ../packages/pcre
+  - cd XSB/packages/pcre
   - ./configure
   - ./makexsb
   - wget https://www.dropbox.com/s/m4pgwk81p3w9cxr/interprolog.jar?dl=0 -O /home/travis/build/prolobjectlink/prolobjectlink-jpi-ip-xsb/interprolog.jar
