@@ -4,8 +4,32 @@ sudo: false
 addons:
   apt:
     packages:
-      - oracle-java8-installer
-      - oracle-java9-installer
+      - build-essential 
+		  - cmake 
+		  - ninja-build
+		  - pkg-config
+      - ncurses-dev
+		  - libreadline-dev
+		  - libedit-dev
+      - libunwind-dev
+      - libgmp-dev
+      - libssl-dev
+      - unixodbc-dev
+      - zlib1g-dev
+		  - libarchive-dev
+      - libossp-uuid-dev
+      - libxext-dev
+		  - libice-dev
+		  - libjpeg-dev
+		  - libxinerama-dev
+		  - libxft-dev
+      - libxpm-dev
+		  - libxt-dev
+      - libdb-dev
+      - libpcre3-dev
+      - libyaml-dev
+      - openjdk-8-jdk
+		  - junit
 
 before_install:
   - wget https://archive.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.zip
@@ -13,6 +37,10 @@ before_install:
   - export M2_HOME=$PWD/apache-maven-3.5.0
   - export PATH=$M2_HOME/bin:$PATH
   - echo "MAVEN_OPTS='-Dmaven.repo.local=$HOME/.m2/repository -Xmx1g -Dorg.slf4j.simpleLogger.showDateTime=true -Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss:SSS'" > ~/.mavenrc
+  - wget http://xsb.sourceforge.net/downloads/XSB.tar.gz
+  - tar -xzvf XSB.tar.gz
+  - cd XSB
+  - ./configure -prefix=$SHARED_LIB && ./makexsb && sudo ./makexsb dynmodule && sudo ./makexsb install
   - wget https://www.dropbox.com/s/m4pgwk81p3w9cxr/interprolog.jar?dl=0 -O /home/travis/build/prolobjectlink/prolobjectlink-jpi-ip-xsb/interprolog.jar
   - mvn install:install-file -Dfile=interprolog.jar -DgroupId=com.declarativa.interprolog -DartifactId=interprolog -Dversion=2.2a4 -Dpackaging=jar
 
@@ -26,10 +54,10 @@ matrix:
       env:
       - DESC="Install Java 8"
       - CMD="mvn clean install site"
-   -  jdk: oraclejdk9
-      env:
-      - DESC="Install Java 9"
-      - CMD="mvn clean install site"
+   
+after_success:
+  - echo "<settings><servers><server><id>ossrh</id><username>\${env.OSSRH_USER}</username><password>\${env.OSSRH_PASS}</password></server></servers></settings>" > ~/settings.xml
+  - mvn deploy --settings ~/settings.xml
 
 script: eval travis_wait 35 $CMD
 
