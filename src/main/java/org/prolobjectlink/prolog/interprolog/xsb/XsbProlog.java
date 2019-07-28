@@ -68,7 +68,7 @@ public class XsbProlog extends InterPrologProvider implements PrologProvider {
 			String xsbPath = "" + builder + "";
 			xsbPath = xsbPath.replace('/', File.separatorChar);
 			xsbPath = xsbPath.replace('\\', File.separatorChar);
-			InterPrologProvider.logger.info(InterPrologEngine.class, xsbPath);
+			Logger.getLogger(XsbProlog.class.getName()).log(Level.INFO, xsbPath);
 			File f = File.createTempFile("prolobjectlink-jpi-ip-cache-", ".pl");
 			InterPrologEngine.cache = f.getCanonicalPath().replace(File.separatorChar, '/');
 			InterPrologEngine.engine = new NativeEngine(xsbPath);
