@@ -19,13 +19,20 @@
  */
 package org.prolobjectlink.prolog.interprolog.xsb;
 
+import static org.prolobjectlink.prolog.PrologLogger.IO;
+
+import java.io.File;
+import java.io.IOException;
+
 import org.prolobjectlink.prolog.PrologConverter;
 import org.prolobjectlink.prolog.PrologEngine;
 import org.prolobjectlink.prolog.PrologJavaConverter;
 import org.prolobjectlink.prolog.PrologProvider;
+import org.prolobjectlink.prolog.interprolog.InterPrologEngine;
 import org.prolobjectlink.prolog.interprolog.InterPrologProvider;
 
 import com.declarativa.interprolog.TermModel;
+import com.xsb.interprolog.NativeEngine;
 
 /**
  * 
@@ -33,6 +40,43 @@ import com.declarativa.interprolog.TermModel;
  * @since 1.0
  */
 public class XsbProlog extends InterPrologProvider implements PrologProvider {
+
+	static {
+		try {
+			String arch = System.getProperty("os.arch");
+			String os = System.getProperty("os.name");
+			String xsbdir = System.getenv("XSB_DIRECTORY");
+			if (xsbdir == null) {
+				throw new UnsatisfiedLinkError("Don't forget define XSB_DIRECTORY enviroment variable");
+			}
+			StringBuilder builder = new StringBuilder();
+			builder.append(xsbdir + "/config/");
+			if (arch.contains("64")) {
+				builder.append("x64");
+			} else if (arch.contains("32")) {
+				builder.append("x86");
+			} else if (arch.contains("86")) {
+				builder.append("x86");
+			}
+			builder.append("-pc-");
+			if (os.startsWith("Windows")) {
+				builder.append("windows");
+			} else if (os.equals("Linux")) {
+				builder.append("linux");
+			}
+			builder.append("/bin");
+			String xsbPath = "" + builder + "";
+			xsbPath = xsbPath.replace('/', File.separatorChar);
+			xsbPath = xsbPath.replace('\\', File.separatorChar);
+			InterPrologProvider.logger.info(InterPrologEngine.class, xsbPath);
+			File f = File.createTempFile("prolobjectlink-jpi-ip-cache-", ".pl");
+			InterPrologEngine.cache = f.getCanonicalPath().replace(File.separatorChar, '/');
+			InterPrologEngine.engine = new NativeEngine(xsbPath);
+			// InterPrologEngine.engine = new XSBSubprocessEngine(xsbPath);
+		} catch (IOException e) {
+			InterPrologProvider.logger.error(InterPrologEngine.class, IO, e);
+		}
+	}
 
 	public XsbProlog() {
 		super(new XsbPrologConverter());

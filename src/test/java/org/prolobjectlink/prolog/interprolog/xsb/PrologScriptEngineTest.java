@@ -34,8 +34,10 @@ import javax.script.ScriptException;
 import javax.script.SimpleBindings;
 import javax.script.SimpleScriptContext;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 public class PrologScriptEngineTest extends PrologBaseTest {
 
 	private final Bindings bindings = new SimpleBindings();
