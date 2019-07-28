@@ -19,10 +19,10 @@
  */
 package org.prolobjectlink.prolog.interprolog.xsb;
 
-import static org.prolobjectlink.prolog.PrologLogger.IO;
-
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.prolobjectlink.prolog.PrologConverter;
 import org.prolobjectlink.prolog.PrologEngine;
@@ -72,9 +72,10 @@ public class XsbProlog extends InterPrologProvider implements PrologProvider {
 			File f = File.createTempFile("prolobjectlink-jpi-ip-cache-", ".pl");
 			InterPrologEngine.cache = f.getCanonicalPath().replace(File.separatorChar, '/');
 			InterPrologEngine.engine = new NativeEngine(xsbPath);
-			// InterPrologEngine.engine = new XSBSubprocessEngine(xsbPath);
 		} catch (IOException e) {
-			InterPrologProvider.logger.error(InterPrologEngine.class, IO, e);
+			Logger.getLogger(XsbProlog.class.getName()).log(Level.SEVERE, null, e);
+		} catch (UnsatisfiedLinkError e) {
+			Logger.getLogger(XsbProlog.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
 
