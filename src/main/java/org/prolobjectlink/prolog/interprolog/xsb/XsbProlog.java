@@ -50,18 +50,24 @@ public class XsbProlog extends InterPrologProvider implements PrologProvider {
 			}
 			StringBuilder builder = new StringBuilder();
 			builder.append(xsbdir + "/config/");
-			if (arch.contains("64")) {
-				builder.append("x64");
-			} else if (arch.contains("32")) {
-				builder.append("x86");
-			} else if (arch.contains("86")) {
-				builder.append("x86");
-			}
-			builder.append("-pc-");
 			if (os.startsWith("Windows")) {
+				if (arch.contains("64")) {
+					builder.append("x64");
+				} else if (arch.contains("86")) {
+					builder.append("x86");
+				}
+				builder.append("-pc-");
 				builder.append("windows");
 			} else if (os.equals("Linux")) {
+				if (arch.contains("64")) {
+					builder.append("x86_64");
+				} else if (arch.contains("86")) {
+					builder.append("x86");
+				}
+				// docker don't identify like -pc-
+				builder.append("-unknown-");
 				builder.append("linux");
+				builder.append("-gnu");
 			}
 			builder.append("/bin");
 			String xsbPath = "" + builder + "";
