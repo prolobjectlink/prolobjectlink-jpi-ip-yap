@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.prolobjectlink</groupId>
 	<artifactId>prolobjectlink-jpi-ip-xsb</artifactId>
-	<version>1.0.0</version>
+	<version>1.0-SNAPSHOT</version>
 	<name>prolobjectlink-jpi-ip-xsb</name>
 	<description>Java Prolog Interface implementation over InterProlog and XSB Prolog</description>
 
@@ -97,12 +97,12 @@
 		<dependency>
 			<groupId>org.prolobjectlink</groupId>
 			<artifactId>prolobjectlink-jpi</artifactId>
-			<version>[1.0.0, )</version>
+			<version>[1.0-SNAPSHOT, )</version>
 		</dependency>
 		<dependency>
 			<groupId>org.prolobjectlink</groupId>
 			<artifactId>prolobjectlink-jpi-ip</artifactId>
-			<version>[1.0.0, )</version>
+			<version>[1.0-SNAPSHOT, )</version>
 		</dependency>
 		<dependency>
 			<groupId>com.declarativa.interprolog</groupId>
