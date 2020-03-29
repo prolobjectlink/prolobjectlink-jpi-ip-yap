@@ -222,7 +222,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<mainClass>
-								org.prolobjectlink.prolog.interprolog.xsb.XsbPrologConsole
+								io.github.prolobjectlink.prolog.interprolog.xsb.XsbPrologConsole
 							</mainClass>
 						</manifest>
 						<manifestEntries>
