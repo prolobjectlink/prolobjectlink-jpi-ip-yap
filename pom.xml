@@ -439,7 +439,7 @@
 						<Import-Package>javax.script;com.declarativa.interprolog;
 							com.declarativa.interprolog.util; com.igormaznitsa.prologparser;
 							com.igormaznitsa.prologparser.terms;
-							com.igormaznitsa.prologparser.tokenizer;${project.groupId}.*;provide:=true</Import-Package>
+							com.igormaznitsa.prologparser.tokenizer;com.xsb.interprolog;${project.groupId}.*;provide:=true</Import-Package>
 						<Bundle-SymbolicName>${project.groupId}.prolog.interprolog.xsb.plugin;singleton:=true</Bundle-SymbolicName>
 						<Bundle-RequiredExecutionEnvironment>JavaSE-1.6</Bundle-RequiredExecutionEnvironment>
 					</instructions>
