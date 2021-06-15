@@ -599,6 +599,7 @@ public class PrologEngineTest extends PrologBaseTest {
 	}
 
 	@Test
+	@Ignore
 	public final void testFindPrologTerm() {
 
 		engine.assertz("parent( pam, bob)");
@@ -727,6 +728,7 @@ public class PrologEngineTest extends PrologBaseTest {
 	}
 
 	@Test
+	@Ignore
 	public final void testFindAllPrologTerm() {
 
 		engine.assertz("parent( pam, bob)");
