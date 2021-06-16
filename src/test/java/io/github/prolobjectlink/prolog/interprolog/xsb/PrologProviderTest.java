@@ -41,8 +41,8 @@ import io.github.prolobjectlink.prolog.PrologList;
 import io.github.prolobjectlink.prolog.PrologStructure;
 import io.github.prolobjectlink.prolog.PrologTerm;
 import io.github.prolobjectlink.prolog.PrologVariable;
-import io.github.prolobjectlink.prolog.interprolog.xsb.XsbProlog;
-import io.github.prolobjectlink.prolog.interprolog.xsb.XsbPrologConverter;
+import io.github.prolobjectlink.prolog.interprolog.yap.YapProlog;
+import io.github.prolobjectlink.prolog.interprolog.yap.YapPrologConverter;
 
 public class PrologProviderTest extends PrologBaseTest {
 
@@ -331,7 +331,7 @@ public class PrologProviderTest extends PrologBaseTest {
 	@Test
 	public final void testToString() {
 
-		assertEquals(XsbProlog.class.getSimpleName() + " [converter=" + XsbPrologConverter.class.getSimpleName() + "]",
+		assertEquals(YapProlog.class.getSimpleName() + " [converter=" + YapPrologConverter.class.getSimpleName() + "]",
 				provider.toString());
 
 	}

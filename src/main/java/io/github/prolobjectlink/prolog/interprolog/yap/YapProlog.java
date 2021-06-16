@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.github.prolobjectlink.prolog.interprolog.xsb;
+package io.github.prolobjectlink.prolog.interprolog.yap;
 
 import java.io.File;
 import java.util.logging.Level;
@@ -38,7 +38,7 @@ import io.github.prolobjectlink.prolog.interprolog.InterPrologProvider;
  * @author Jose Zalacain
  * @since 1.0
  */
-public class XsbProlog extends InterPrologProvider implements PrologProvider {
+public class YapProlog extends InterPrologProvider implements PrologProvider {
 
 	static {
 		try {
@@ -73,27 +73,27 @@ public class XsbProlog extends InterPrologProvider implements PrologProvider {
 			String xsbPath = "" + builder + "";
 			xsbPath = xsbPath.replace('/', File.separatorChar);
 			xsbPath = xsbPath.replace('\\', File.separatorChar);
-			Logger.getLogger(XsbProlog.class.getName()).log(Level.INFO, xsbPath);
+			Logger.getLogger(YapProlog.class.getName()).log(Level.INFO, xsbPath);
 			InterPrologEngine.engine = new NativeEngine(xsbPath);
 		} catch (UnsatisfiedLinkError e) {
-			Logger.getLogger(XsbProlog.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(YapProlog.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
 
-	public XsbProlog() {
-		super(new XsbPrologConverter());
+	public YapProlog() {
+		super(new YapPrologConverter());
 	}
 
-	XsbProlog(PrologConverter<TermModel> converter) {
+	YapProlog(PrologConverter<TermModel> converter) {
 		super(converter);
 	}
 
 	public PrologJavaConverter getJavaConverter() {
-		return new XsbPrologJavaConverter(this);
+		return new YapPrologJavaConverter(this);
 	}
 
 	public PrologEngine newEngine() {
-		return new XsbPrologEngine(this);
+		return new YapPrologEngine(this);
 	}
 
 	public PrologEngine newEngine(String path) {

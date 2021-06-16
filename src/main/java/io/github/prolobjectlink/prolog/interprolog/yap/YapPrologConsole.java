@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.github.prolobjectlink.prolog.interprolog.xsb;
+package io.github.prolobjectlink.prolog.interprolog.yap;
 
 import io.github.prolobjectlink.prolog.AbstractConsole;
 import io.github.prolobjectlink.prolog.PrologConsole;
@@ -27,14 +27,14 @@ import io.github.prolobjectlink.prolog.PrologConsole;
  * @author Jose Zalacain
  * @since 1.0
  */
-public class XsbPrologConsole extends AbstractConsole implements PrologConsole {
+public class YapPrologConsole extends AbstractConsole implements PrologConsole {
 
-	public XsbPrologConsole() {
-		super(new XsbProlog());
+	public YapPrologConsole() {
+		super(new YapProlog());
 	}
 
 	public static void main(String[] args) {
-		new XsbPrologConsole().run(args);
+		new YapPrologConsole().run(args);
 	}
 
 }
