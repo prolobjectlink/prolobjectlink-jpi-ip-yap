@@ -45,6 +45,10 @@ public class XsbPrologEngine extends InterPrologEngine implements PrologEngine {
 		return engine.getPrologNumericVersion();
 	}
 
+	public final String getVendor() {
+		return "XSB Prolog";
+	}
+
 	public final String getName() {
 		return "XSB Prolog";
 	}
