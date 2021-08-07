@@ -19,7 +19,6 @@
  */
 package io.github.prolobjectlink.prolog.interprolog.yap;
 
-import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,12 +69,14 @@ public class YapProlog extends InterPrologProvider implements PrologProvider {
 				builder.append("-gnu");
 			}
 			builder.append("/bin");
-			String xsbPath = "" + builder + "";
-			xsbPath = xsbPath.replace('/', File.separatorChar);
-			xsbPath = xsbPath.replace('\\', File.separatorChar);
-			Logger.getLogger(YapProlog.class.getName()).log(Level.INFO, xsbPath);
+			// String xsbPath = "" + builder + "";
+			// xsbPath = xsbPath.replace('/', File.separatorChar);
+			// xsbPath = xsbPath.replace('\\', File.separatorChar);
+			// Logger.getLogger(YapProlog.class.getName()).log(Level.INFO, xsbPath);
 			// InterPrologEngine.engine = new NativeEngine(xsbPath);
-			InterPrologEngine.engine = new YAPSubprocessEngine();
+			String yapPath = "C:\\Program Files\\Yap64\\bin";
+			Logger.getLogger(YapProlog.class.getName()).log(Level.INFO, yapPath);
+			InterPrologEngine.engine = new YAPSubprocessEngine(yapPath,true);
 		} catch (UnsatisfiedLinkError e) {
 			Logger.getLogger(YapProlog.class.getName()).log(Level.SEVERE, null, e);
 		}
