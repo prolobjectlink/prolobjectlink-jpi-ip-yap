@@ -19,6 +19,7 @@
  */
 package io.github.prolobjectlink.prolog.interprolog.yap;
 
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,42 +42,45 @@ public class YapProlog extends InterPrologProvider implements PrologProvider {
 
 	static {
 		try {
-			String arch = System.getProperty("os.arch");
-			String os = System.getProperty("os.name");
-			String xsbdir = System.getenv("XSB_DIRECTORY");
-			if (xsbdir == null) {
-				throw new UnsatisfiedLinkError("Don't forget define XSB_DIRECTORY enviroment variable");
-			}
-			StringBuilder builder = new StringBuilder();
-			builder.append(xsbdir + "/config/");
-			if (os.startsWith("Windows")) {
-				if (arch.contains("64")) {
-					builder.append("x64");
-				} else if (arch.contains("86")) {
-					builder.append("x86");
-				}
-				builder.append("-pc-");
-				builder.append("windows");
-			} else if (os.equals("Linux")) {
-				if (arch.contains("64")) {
-					builder.append("x86_64");
-				} else if (arch.contains("86")) {
-					builder.append("x86");
-				}
-				// docker don't identify like -pc-
-				builder.append("-unknown-");
-				builder.append("linux");
-				builder.append("-gnu");
-			}
-			builder.append("/bin");
+//			String arch = System.getProperty("os.arch");
+//			String os = System.getProperty("os.name");
+//			String xsbdir = System.getenv("XSB_DIRECTORY");
+//			if (xsbdir == null) {
+//				throw new UnsatisfiedLinkError("Don't forget define XSB_DIRECTORY enviroment variable");
+//			}
+//			StringBuilder builder = new StringBuilder();
+//			builder.append(xsbdir + "/config/");
+//			if (os.startsWith("Windows")) {
+//				if (arch.contains("64")) {
+//					builder.append("x64");
+//				} else if (arch.contains("86")) {
+//					builder.append("x86");
+//				}
+//				builder.append("-pc-");
+//				builder.append("windows");
+//			} else if (os.equals("Linux")) {
+//				if (arch.contains("64")) {
+//					builder.append("x86_64");
+//				} else if (arch.contains("86")) {
+//					builder.append("x86");
+//				}
+//				// docker don't identify like -pc-
+//				builder.append("-unknown-");
+//				builder.append("linux");
+//				builder.append("-gnu");
+//			}
+//			builder.append("/bin");
 			// String xsbPath = "" + builder + "";
-			// xsbPath = xsbPath.replace('/', File.separatorChar);
-			// xsbPath = xsbPath.replace('\\', File.separatorChar);
-			// Logger.getLogger(YapProlog.class.getName()).log(Level.INFO, xsbPath);
-			// InterPrologEngine.engine = new NativeEngine(xsbPath);
+
 			String yapPath = "C:\\Program Files\\Yap64\\bin";
+			yapPath = yapPath.replace('/', File.separatorChar);
+			yapPath = yapPath.replace('\\', File.separatorChar);
 			Logger.getLogger(YapProlog.class.getName()).log(Level.INFO, yapPath);
-			InterPrologEngine.engine = new YAPSubprocessEngine(yapPath,true);
+			// InterPrologEngine.engine = new NativeEngine(yapPath);
+//			InterPrologEngine.engine = new YAPSubprocessEngine();
+//			InterPrologEngine.engine = new YAPSubprocessEngine(yapPath, true);
+			InterPrologEngine.engine = new YAPSubprocessEngine(new String[] { yapPath }, true, true, true);
+
 		} catch (UnsatisfiedLinkError e) {
 			Logger.getLogger(YapProlog.class.getName()).log(Level.SEVERE, null, e);
 		}
