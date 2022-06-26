@@ -72,7 +72,8 @@ public class YapProlog extends InterPrologProvider implements PrologProvider {
 //			builder.append("/bin");
 			// String xsbPath = "" + builder + "";
 
-			String yapPath = "C:\\Program Files\\Yap64\\bin";
+			String yapPath = "C:\\Program Files\\Yap\\bin";
+//			String yapPath = "C:\\Program Files\\Yap64\\bin";
 			yapPath = yapPath.replace('/', File.separatorChar);
 			yapPath = yapPath.replace('\\', File.separatorChar);
 			Logger.getLogger(YapProlog.class.getName()).log(Level.INFO, yapPath);
